@@ -4,14 +4,15 @@ const authMiddleware = require('./middleware/auth');
 const errorHandler = require('./middleware/error');
 const routes = require('./routes');
 const pkg = require('./package.json');
+// const configdb = require('./database/configdb');
 
-const { port, dbUrl, secret } = config;
+const { port, secret } = config;
 const app = express();
 
 // TODO: Conexión a la Base de Datos (MongoDB o MySQL)
-
 app.set('config', config);
 app.set('pkg', pkg);
+// app.set('configdb', configdb);
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
