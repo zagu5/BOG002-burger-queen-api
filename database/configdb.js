@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 const mysql = require('mysql');
-const createTableUsers = require('./initDb');
 
 // Creando la conexion con la base de datos
 const connection = mysql.createConnection({
@@ -17,7 +16,6 @@ connection.connect((err) => {
     throw err;
   } else {
     console.log('CONEXION EXITOSA');
-    createTableUsers(connection);
   }
 });
 
