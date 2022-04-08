@@ -42,7 +42,7 @@ module.exports = (app, nextMain) => {
         if (validPassword) {
           // Creando el token con JSON Web Token
           const token = jwt.sign({ email }, secret, { expiresIn: 60 * 60 * 24 });
-          resp.status(200).json({ message: 'Valid password', token });
+          resp.status(200).json({ message: 'Valid password', token, user });
         } else {
           resp.status(400).json({ error: 'Invalid Password' });
         }
