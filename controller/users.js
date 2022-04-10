@@ -9,6 +9,7 @@ const { validateUser, createUser } = require('../services/users');
 module.exports = {
 
   getUsers: (req, resp, next) => {
+    
   },
 
   postUsers: (req, resp, next) => {
