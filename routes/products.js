@@ -3,6 +3,12 @@ const {
   requireAdmin,
 } = require('../middleware/auth');
 
+const {
+  postCategories,
+  postProductType,
+  postProduct,
+} = require('../controller/products');
+
 /** @module products */
 module.exports = (app, nextMain) => {
   /**
@@ -72,9 +78,46 @@ module.exports = (app, nextMain) => {
    * @code {403} si no es admin
    * @code {404} si el producto con `productId` indicado no existe
    */
-  app.post('/products', requireAdmin, (req, resp, next) => {
-  });
+  app.post('/products', requireAdmin, postProduct);
 
+  /**
+   * @name POST /category
+   * @description Crea una nueva categoria
+   * @path {POST} /category
+   * @auth Requiere `token` de autenticación y que la usuaria sea **admin**
+   * @body {String} name Nombre
+   * @response {Object} category
+   * @response {String} category._id Id
+   * @response {String} category.name Nombre
+   * @response {Date} category.dateEntry Fecha de creación
+   * @response {Date} category.dateEntry Fecha de modificación
+   * @code {200} si la autenticación es correcta
+   * @code {400} si no se indican `name`
+   * @code {401} si no hay cabecera de autenticación
+   * @code {403} si no es admin
+   * @code {404} si la category con `categoryId` indicado no existe
+   */
+  app.post('/category', requireAdmin, postCategories);
+
+  /**
+   * @name POST /product/type
+   * @description Crea un nuevo tipo de producto
+   * @path {POST} /products/type
+   * @auth Requiere `token` de autenticación y que la usuaria sea **admin**
+   * @body {String} name Nombre
+   * @body {String} [type] Tipo/Categoría
+   * @response {Object} productType
+   * @response {String} productstype._id Id
+   * @response {String} producttype.name Nombre
+   * @response {String} producttype.type Tipo/Categoría
+   * @response {Date} producttype.dateEntry Fecha de creación
+   * @code {200} si la autenticación es correcta
+   * @code {400} si no se indican `name`
+   * @code {401} si no hay cabecera de autenticación
+   * @code {403} si no es admin
+   * @code {404} si el producto con `productTypeId` indicado no existe
+   */
+  app.post('/products/type', requireAdmin, postProductType);
 
   /**
    * @name PUT /products

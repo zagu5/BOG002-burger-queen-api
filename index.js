@@ -7,7 +7,7 @@ const routes = require('./routes');
 const pkg = require('./package.json');
 const initDb = require('./database/initDb');
 const dbcategories = require('./database/dbcategories');
-const dbProductType = require('./database/dbProductType');
+const dbProductType = require('./database/dbproductType');
 const dbaditional = require('./database/dbaditional');
 const dbproducts = require('./database/dbproducts');
 const dbclients = require('./database/dbclients');
@@ -29,6 +29,7 @@ app.use(express.json());
 app.use(cors());
 app.use(authMiddleware(secret));
 
+// Creación de Tablas en la Base de datos
 initDb();
 dbcategories();
 dbProductType();
