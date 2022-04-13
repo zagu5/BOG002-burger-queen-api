@@ -9,13 +9,11 @@ const { validateUser, createUser } = require('../services/users');
 module.exports = {
 
   getUsers: (req, resp, next) => {
-    
   },
 
-  postUsers: (req, resp, next) => {
+  postUsers: (req, resp) => {
     const { email } = req.body;
 
-    console.log(email, 'body post users');
     // Verifica si el email existe en la base de datos
     validateUser(email).then((res) => {
       console.log(res, 'post res promesa');

@@ -15,24 +15,19 @@ const validateUser = (email) => new Promise((resolve, reject) => {
 
   // Realizar el query con la consulta en la base de datos table usuarios
   configdb.query('SELECT * FROM usuarios  WHERE email = ?', [email], (error, results) => {
-    console.log('results de validate ', results.length === 0);
-    console.log('comparndo emails', results);
     if (error) {
       reject(error);
     }
 
     if (results.length === 0) {
-      console.log('Cuando results es igual a 0');
       code = 401;
       msg = 'User does not exist';
       validUser = false;
     } else if (results[0].email !== email) {
-      console.log('Cuando results es diferente al email');
       validUser = false;
       code = 400;
       msg = 'Invalid User';
     } else {
-      console.log('Cuando results es igual al email');
       code = 200;
       msg = 'User exist';
       validUser = true;
